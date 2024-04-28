@@ -1,0 +1,73 @@
+.done {
+    text-decoration: line-through;
+    opacity: 0.5;
+} 
+
+.active {
+    color:red;
+}
+
+.Task {
+    cursor: text;
+}
+
+.checkmark {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #f5f5f5;
+    border-radius: 50%;
+    appearance: none;
+    margin: 10px 20px 10px 10px;
+    vertical-align: middle;
+    accent-color: red; 
+    cursor: pointer;
+}
+
+.checkmark:checked {
+    appearance: auto;
+    clip-path: circle(46% at 50% 50%);
+    margin: 10px 20px 10px 10px;
+}
+
+.icon {
+    width: 40px;
+    height: 30px;
+    background-color: white;
+    color: #cc9a9a;
+    border: none;
+    float:right;
+    font-size: 19px;
+    margin-top: 10px;
+    padding: 0;
+}
+
+.icon-edit {
+    margin-left: 5px;
+}
+
+.icon-edit::after {
+    content:'✎';
+}
+
+.icon-delete::after {
+    content: 'x';
+}
+
+span.editing .view {
+    display: none;
+}
+
+.edit {
+    height: 48px;
+    width: 486px;
+    padding-left: 60px;
+    font-size: 24px;
+    border: none;
+}
+
+.created {
+    font-size: 12px;
+    color: grey;
+    margin-top: 18px;
+    float: right;
+}

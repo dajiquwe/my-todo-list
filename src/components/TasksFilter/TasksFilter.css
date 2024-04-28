@@ -1,0 +1,16 @@
+.filter {
+    width: 200px;
+    display:inline-block;
+    text-align: center;
+}
+
+.filter span {
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.choosen {
+    border: 1px solid #d3aeae;
+    border-radius: 10%;
+}
