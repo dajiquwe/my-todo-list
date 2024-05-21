@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import TaskList from './components/TaskList/TaskList';
 import NewTaskForm from './components/NewTaskForm/NewTaskForm';
 import Footer from './components/Footer/Footer';
+import Timer from './components/Timer/Timer';
 
 import './index.css';
 
@@ -131,6 +132,7 @@ export default class App extends Component {
     return (
       <div className="app">
         <h1>Todos</h1>
+        <Timer />
         <NewTaskForm onItemAdded={this.addItem} placeholder="What needs to be done?" />
         <TaskList
           todos={copy}
