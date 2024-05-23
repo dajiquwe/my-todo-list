@@ -7,7 +7,7 @@ import './TaskList.css';
 
 export default class TaskList extends Component {
   render() {
-    const { todos, onDeleted, onToggleDone, onChangeCheck, editItem } = this.props;
+    const { todos, onDeleted, onToggleDone, onChangeCheck, editItem, onStartTimer, onStopTimer } = this.props;
 
     return (
       <ul>
@@ -23,8 +23,12 @@ export default class TaskList extends Component {
               onDeleted={() => onDeleted(item.id)}
               onToggleDone={() => onToggleDone(item.id)}
               onChangeCheck={onChangeCheck}
+              onStartTimer={() => onStartTimer(item.id)}
+              onStopTimer={() => onStopTimer(item.intervalId)}
               item={item}
               editItem={editItem}
+              time={item.time}
+              intervalId={item.intervalId}
             />
           </li>
         ))}
