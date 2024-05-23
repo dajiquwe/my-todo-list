@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import TaskList from './components/TaskList/TaskList';
 import NewTaskForm from './components/NewTaskForm/NewTaskForm';
 import Footer from './components/Footer/Footer';
+// import Timer from './components/Timer/Timer';
 
 import './index.css';
 
@@ -18,12 +19,19 @@ export default class App extends Component {
     return {
       label,
       done: false,
-      // active: false,
       id: this.maxId++,
       checked: false,
       date: new Date(),
+      time: 0,
+      intervalId: null,
     };
   }
+  // const intervalID = setInterval(() => {
+  //   this.setState({
+  //     time: this.state.time + 1,
+  //   });
+  // }, 1000);
+  // this.setState({ intervalID });
 
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
@@ -35,6 +43,37 @@ export default class App extends Component {
         todoData: newArray,
       };
     });
+  };
+
+  startTimer = (id) => {
+    this.setState(({ todoData }) => {
+      const arrNew = [...todoData];
+      todoData.map((el) => {
+        if (el.id === id) {
+          el.intervalId = setInterval(() => {
+            this.setState(({ todoData }) => {
+              const newArr = [...todoData];
+              newArr.map((el) => {
+                if (el.id === id) {
+                  el.time = el.time + 10;
+                }
+              });
+              return {
+                todoData: newArr,
+              };
+            });
+          }, 100);
+        }
+      });
+      return {
+        todoData: arrNew,
+      };
+    });
+    console.log(this.state.todoData);
+  };
+
+  stopTimer = (intervalId) => {
+    clearInterval(intervalId);
   };
 
   addItem = (text) => {
@@ -55,15 +94,6 @@ export default class App extends Component {
     const newItem = { ...oldItem, [propName]: !oldItem[propName] };
     return [...arr.slice(0, index), newItem, ...arr.slice(index + 1)];
   }
-
-  // onToggleActive = (id) => {
-  //   this.setState(({todoData}) => {
-  //     return {
-  //       todoData: this.toggleProperty(todoData, id, 'active')
-  //     };
-  //   });
-  //   console.log('Toggle Active', id);
-  // }
 
   onToggleDone = (id) => {
     this.setState(({ todoData }) => {
@@ -135,10 +165,11 @@ export default class App extends Component {
         <TaskList
           todos={copy}
           onDeleted={this.deleteItem}
-          // onToggleActive={this.onToggleActive}
           onToggleDone={this.onToggleDone}
           onChangeCheck={this.onChangeCheck}
           editItem={this.editItem}
+          onStartTimer={this.startTimer}
+          onStopTimer={this.stopTimer}
         />
         <Footer
           itemsLeft={todoCount}
