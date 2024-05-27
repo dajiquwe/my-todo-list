@@ -74,7 +74,7 @@ span.editing .view {
 }
 
 .timer {
-    font-size: 12px;
+    font-size: 15px;
     color: #cc9a9a;
 }
 
@@ -83,7 +83,6 @@ span.editing .view {
     color: #cc9a9a;
     background-color: white;
     border: 1px solid white;
-    margin-left: 3px;
     cursor: pointer;
 }
 

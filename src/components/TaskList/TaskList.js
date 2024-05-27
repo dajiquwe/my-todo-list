@@ -28,6 +28,7 @@ export default class TaskList extends Component {
               item={item}
               editItem={editItem}
               time={item.time}
+              minTime={item.minTime}
               intervalId={item.intervalId}
             />
           </li>

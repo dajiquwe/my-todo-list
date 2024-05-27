@@ -70,8 +70,11 @@ export default class Task extends Component {
           {/* {this.props.time} */}
           <button className="timers icon-play" onClick={onStartTimer}></button>
           <button className="timers icon-pause" onClick={onStopTimer}></button>
-          <span className="timer">{('0' + Math.floor((this.props.time / 6000) % 60)).slice(-2)}:</span>
-          <span className="timer">{('0' + Math.floor((this.props.time / 100) % 60)).slice(-2)}</span>
+          {/* <span className="timer">{('0' + Math.floor((this.props.time / 6000) % 60)).slice(-2)}:</span>
+          <span className="timer">{('0' + Math.floor((this.props.time / 100) % 60)).slice(-2)}</span> */}
+          <span className="timer">{this.props.minTime}:</span>
+          <span className="timer">{this.props.time}</span>
+
           <span className="created">
             {`created ${formatDistanceToNow(date, {
               includeSeconds: true,

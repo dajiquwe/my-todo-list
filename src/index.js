@@ -15,23 +15,18 @@ export default class App extends Component {
     toShow: 'all',
   };
 
-  createTodoItem(label) {
+  createTodoItem(label, sec, min) {
     return {
       label,
       done: false,
       id: this.maxId++,
       checked: false,
       date: new Date(),
-      time: 0,
+      minTime: min,
+      time: sec,
       intervalId: null,
     };
   }
-  // const intervalID = setInterval(() => {
-  //   this.setState({
-  //     time: this.state.time + 1,
-  //   });
-  // }, 1000);
-  // this.setState({ intervalID });
 
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
@@ -55,29 +50,46 @@ export default class App extends Component {
               const newArr = [...todoData];
               newArr.map((el) => {
                 if (el.id === id) {
-                  el.time = el.time + 10;
+                  if (el.time !== 0 || el.minTime !== 0) {
+                    if (el.minTime > 0) {
+                      if (el.time === 0) {
+                        el.minTime = el.minTime - 1;
+                        el.time = 60;
+                      }
+                    } else if (el.minTime === 0 && el.time === 1) {
+                      clearInterval(el.intervalId);
+                    }
+                    el.time = el.time - 1;
+                  }
+                  // if (el.time === 0) {
+                  //   clearInterval(el.intervalId);
+                  // }
                 }
               });
               return {
                 todoData: newArr,
               };
             });
-          }, 100);
+          }, 1000);
         }
       });
       return {
         todoData: arrNew,
       };
     });
-    console.log(this.state.todoData);
+    // console.log(this.state.todoData);
   };
+
+  // onTimerAdded = (text) => {};
 
   stopTimer = (intervalId) => {
     clearInterval(intervalId);
   };
 
-  addItem = (text) => {
-    const newItem = this.createTodoItem(text);
+  addItem = (text, sec, min) => {
+    console.log('sec', sec);
+    console.log('min', min);
+    const newItem = this.createTodoItem(text, sec, min);
 
     this.setState(({ todoData }) => {
       const newArr = [...todoData, newItem];
