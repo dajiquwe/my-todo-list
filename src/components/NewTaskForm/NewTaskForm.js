@@ -16,6 +16,11 @@ export default class NewTaskForm extends Component {
   };
 
   onSecChange = (e) => {
+    const secN = Number(e.target.value);
+    if (secN > 59) {
+      alert('Введите значение не больше 59');
+      e.target.value = 59;
+    }
     this.setState({
       sec: e.target.value,
     });
@@ -51,7 +56,7 @@ export default class NewTaskForm extends Component {
           value={this.state.label}
           autoFocus
         />
-        <input className="sec" placeholder="Sec" onChange={this.onSecChange} value={this.state.sec} />
+        <input className="sec" placeholder="Sec" onChange={this.onSecChange} max="60" />
         <input className="sec" placeholder="Min" onChange={this.onMinChange} value={this.state.min} />
         <button type="submit" className="secretB"></button>
       </form>

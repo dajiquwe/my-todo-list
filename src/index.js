@@ -45,6 +45,9 @@ export default class App extends Component {
       const arrNew = [...todoData];
       todoData.map((el) => {
         if (el.id === id) {
+          if (el.intervalId !== null) {
+            clearInterval(el.intervalId);
+          }
           el.intervalId = setInterval(() => {
             this.setState(({ todoData }) => {
               const newArr = [...todoData];
@@ -61,9 +64,6 @@ export default class App extends Component {
                     }
                     el.time = el.time - 1;
                   }
-                  // if (el.time === 0) {
-                  //   clearInterval(el.intervalId);
-                  // }
                 }
               });
               return {
@@ -112,6 +112,14 @@ export default class App extends Component {
       return {
         todoData: this.toggleProperty(todoData, id, 'done'),
       };
+    });
+    this.setState(({ todoData }) => {
+      todoData.map((el) => {
+        if (el.id === id) {
+          el.time = 0;
+          el.minTime = 0;
+        }
+      });
     });
     // console.log('Toggle Done', id, this.state.todoData);
   };
